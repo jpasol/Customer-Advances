@@ -162,14 +162,14 @@ Partial Class balTrack
         Me.ccrnum.HeaderText = "Ref. #"
         Me.ccrnum.Name = "ccrnum"
         Me.ccrnum.ReadOnly = True
-        Me.ccrnum.Width = 130
+        Me.ccrnum.Width = 150
         '
         'amtpay
         '
         Me.amtpay.HeaderText = "Amount"
         Me.amtpay.Name = "amtpay"
         Me.amtpay.ReadOnly = True
-        Me.amtpay.Width = 130
+        Me.amtpay.Width = 110
         '
         'ccrdte
         '

@@ -71,6 +71,7 @@ Public Class frmCusadv
         loadAdvances()
         loadCustomer()
         loadadrPay()
+        loadCCR()
         viewAdvances(dsAdvances.Tables.Item("Advances").Rows, dvAdvances)
         Label1.Text = "Logged on as " & UCase(Environment.UserName)
 

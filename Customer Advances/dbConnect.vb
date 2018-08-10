@@ -10,18 +10,21 @@
         Dim dtAdvances As New DataTable
         Dim dtCustomers As New DataTable
         Dim dtPayments As New DataTable
+        Dim dtCCRNum As New DataTable
         ''''''''''''''''''''''''''''''''''''''''''''
 
         '''''''''''Rename DataTables''''''''''''''''
         dtAdvances.TableName = "Advances"
         dtCustomers.TableName = "Customers"
         dtPayments.TableName = "Payments"
+        dtCCRNum.TableName = "CCRNos"
         ''''''''''''''''''''''''''''''''''''''''''''
 
         ''''''''''''''Add DataTable'''''''''''''''''
         dsAdvances.Tables.Add(dtAdvances)
         dsAdvances.Tables.Add(dtCustomers)
         dsAdvances.Tables.Add(dtPayments)
+        dsAdvances.Tables.Add(dtCCRNum)
         ''''''''''''''''''''''''''''''''''''''''''''
 
     End Sub
@@ -101,7 +104,18 @@ SELECT [cuscde]
         dvBalances.Rows.Clear()
 
         For Each drPay As DataRow In drSelection
-            dvBalances.Rows.Add(drPay("Reference No."), drPay("adramt"), drPay("sysdttm"))
+            With dsAdvances.Tables.Item("CCRNos")
+                Dim refnum As Long = drPay("Reference No.")
+                Dim type As String = drPay("Type")
+                Dim fromCCRPay As String = .Select("refnum=" & refnum & " AND TYPE='" & type & "'", "ccrnum desc")(0).Field(Of Object)("ccrnum")
+                Dim toCCRPay As String = .Select("refnum=" & refnum & " AND TYPE='" & type & "'", "ccrnum asc")(0).Field(Of Object)("ccrnum")
+                Dim strDocno As String = type & "# "
+
+                If fromCCRPay = toCCRPay Then strDocno &= fromCCRPay Else strDocno &= fromCCRPay & " - " & toCCRPay
+
+
+                dvBalances.Rows.Add(strDocno, drPay("adramt"), drPay("sysdttm"))
+            End With
         Next
     End Sub
 
@@ -110,6 +124,7 @@ SELECT [cuscde]
 
         cmdCusadv.CommandText = "
 select [refnum] as 'Reference No.'
+,'CCR' as 'Type'
 ,[adramt]
 ,[adrnum]
 ,pay.[sysdttm]
@@ -117,6 +132,7 @@ from cympay pay
 where adramt > 0
 union
 select [refnum] as 'Reference No.'
+,'CCR' as 'Type'
 ,[adramt2]
 ,[adrnum2]
 ,pay.[sysdttm]
@@ -124,6 +140,7 @@ from cympay pay
 where adramt2 > 0
 union
 select [refnum] as 'Reference No.'
+,'CCR' as 'Type'
 ,[adramt3]
 ,[adrnum3]
 ,pay.[sysdttm]
@@ -133,6 +150,7 @@ where adramt3 > 0
 union
 
 select refnum as 'Reference No.'
+,'CCMR' as 'Type'
 ,[adramt]
 ,[adrnum]
 ,pay.[sysdttm]
@@ -140,6 +158,7 @@ from ccrpay pay
 where adramt > 0
 union
 select refnum as 'Reference No.'
+,'CCMR' as 'Type'
 ,[adramt2]
 ,[adrnum2]
 ,pay.[sysdttm]
@@ -147,6 +166,7 @@ from ccrpay pay
 where adramt2 > 0
 union
 select refnum as 'Reference No.'
+,'CCMR' as 'Type'
 ,[adramt3]
 ,[adrnum3]
 ,pay.[sysdttm]
@@ -163,4 +183,34 @@ ORDER BY SYSDTTM DESC
 
         rsCusadv.Close()
     End Sub
+
+    Public Sub loadCCR()
+        dsAdvances.Tables.Item("CCRNos").Clear()
+
+        cmdCusadv.CommandText = "
+	select 'CCR' as 'Type'
+	,refnum 'refnum'
+	,gpsnum 'ccrnum'
+	from cymgps
+	union
+	select 'CCMR' as 'Type'
+	,refnum
+	,ccrnum
+	from ccrcyx
+	union
+	select 'CCMR' as 'Type'
+	,refnum
+	,ccrnum
+	from ccrdtl
+
+    order by refnum"
+
+        cmdCusadv.ActiveConnection = gcnnBilling
+        rsCusadv.Open(cmdCusadv)
+        dataAdap.Fill(dsAdvances.Tables.Item("CCRNos"), rsCusadv)
+
+        rsCusadv.Close()
+    End Sub
 End Module
+
+
