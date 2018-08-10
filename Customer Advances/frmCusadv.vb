@@ -70,6 +70,7 @@ Public Class frmCusadv
         dbConnect.dbConnect()
         loadAdvances()
         loadCustomer()
+        loadadrPay()
         viewAdvances(dsAdvances.Tables.Item("Advances").Rows, dvAdvances)
         Label1.Text = "Logged on as " & UCase(Environment.UserName)
 
@@ -197,11 +198,14 @@ Public Class frmCusadv
     Private Sub txtCusnam_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCusnam.KeyDown
         On Error Resume Next
         If e.KeyCode = Keys.Return And (Not pnlEntries.Enabled) And pnlCRUD.Enabled Then 'New / Edit mode
+
             Dim tmpCusnam As String = txtCusnam.Text
             With dsAdvances.Tables.Item("Advances")
                 viewAdvances(IIf(txtCusnam.Text = "", .Rows, .Select("cusnam Like '%" & tmpCusnam & "%'")), dvAdvances)
             End With
+            If Not (dvAdvances.SelectedRows.Count > 0) Then initTxtbox()
         End If
+
     End Sub
 
 #End Region
@@ -237,6 +241,7 @@ Public Class frmCusadv
 
     Private Sub cmdRefresh_Click(sender As Object, e As EventArgs) Handles cmdRefresh.Click
         loadAdvances()
+
         viewAdvances(dsAdvances.Tables.Item("Advances").Rows, dvAdvances)
     End Sub
 
@@ -292,7 +297,7 @@ Public Class frmCusadv
     Private Sub dvAdvances_SelectionChanged(sender As Object, e As EventArgs) Handles dvAdvances.SelectionChanged
         On Error Resume Next
 
-        With dsAdvances.Tables.Item("Advances").Select("ornum = " & dvAdvances.CurrentRow.Cells(0).Value)(0)
+        With dsAdvances.Tables.Item("Advances").Select("ornum = " & dvAdvances.SelectedCells(0).Value)(0)
 
             txtCuscde.Text = .Field(Of Object)("cuscde")
 
@@ -315,6 +320,21 @@ Public Class frmCusadv
             Dim tmpOR As Integer = txtOrnum.Text
             viewAdvances(dsAdvances.Tables.Item("Advances").Select("ornum=" & tmpOR), dvAdvances)
         End If
+    End Sub
+
+    Private Sub dvAdvances_KeyDown(sender As Object, e As KeyEventArgs) Handles dvAdvances.KeyDown
+        If e.KeyCode = Keys.Return Then
+            If dvAdvances.SelectedRows.Count > 0 Then
+                Dim checkbal As New balTrack(pOrnum:=txtOrnum.Text,
+                                             pOramt:=txtOramt.Text,
+                                             pOrbal:=txtOrbal.Text,
+                                             pSysdttm:=dvAdvances.SelectedCells(4).Value)
+
+                checkbal.ShowDialog()
+            End If
+            e.SuppressKeyPress = True
+        End If
+
     End Sub
 
     Private Sub dvAdvances_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dvAdvances.CellContentClick

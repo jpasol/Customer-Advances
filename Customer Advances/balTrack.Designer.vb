@@ -22,89 +22,161 @@ Partial Class balTrack
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.dvBalances = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtOrnum = New System.Windows.Forms.TextBox()
+        Me.txtOrdttm = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtOramt = New System.Windows.Forms.TextBox()
+        Me.txtOrbal = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ccrnum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.amtpay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ccrdte = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.dvBalances, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'dvBalances
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 94)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(512, 344)
-        Me.DataGridView1.TabIndex = 0
+        Me.dvBalances.AllowUserToAddRows = False
+        Me.dvBalances.AllowUserToDeleteRows = False
+        Me.dvBalances.AllowUserToResizeColumns = False
+        Me.dvBalances.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        Me.dvBalances.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dvBalances.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dvBalances.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dvBalances.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ccrnum, Me.amtpay, Me.ccrdte})
+        Me.dvBalances.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dvBalances.Location = New System.Drawing.Point(12, 94)
+        Me.dvBalances.Name = "dvBalances"
+        Me.dvBalances.ReadOnly = True
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dvBalances.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dvBalances.RowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.dvBalances.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dvBalances.ShowCellErrors = False
+        Me.dvBalances.ShowCellToolTips = False
+        Me.dvBalances.ShowEditingIcon = False
+        Me.dvBalances.ShowRowErrors = False
+        Me.dvBalances.Size = New System.Drawing.Size(512, 344)
+        Me.dvBalances.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 16)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.Label1.Location = New System.Drawing.Point(8, 24)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.Size = New System.Drawing.Size(105, 22)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Label1"
+        Me.Label1.Text = "OR Number"
         '
-        'TextBox1
+        'txtOrnum
         '
-        Me.TextBox1.Location = New System.Drawing.Point(54, 13)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(84, 20)
-        Me.TextBox1.TabIndex = 2
+        Me.txtOrnum.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.txtOrnum.Location = New System.Drawing.Point(118, 21)
+        Me.txtOrnum.Name = "txtOrnum"
+        Me.txtOrnum.ReadOnly = True
+        Me.txtOrnum.Size = New System.Drawing.Size(151, 27)
+        Me.txtOrnum.TabIndex = 2
         '
-        'TextBox2
+        'txtOrdttm
         '
-        Me.TextBox2.Location = New System.Drawing.Point(54, 58)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(470, 20)
-        Me.TextBox2.TabIndex = 3
+        Me.txtOrdttm.Location = New System.Drawing.Point(118, 68)
+        Me.txtOrdttm.Name = "txtOrdttm"
+        Me.txtOrdttm.ReadOnly = True
+        Me.txtOrdttm.Size = New System.Drawing.Size(406, 20)
+        Me.txtOrdttm.TabIndex = 3
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(9, 61)
+        Me.Label2.Location = New System.Drawing.Point(9, 71)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(39, 13)
+        Me.Label2.Size = New System.Drawing.Size(103, 13)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Label2"
+        Me.Label2.Text = "Date Recently Used"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(178, 15)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.Label3.Location = New System.Drawing.Point(286, 9)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(39, 13)
+        Me.Label3.Size = New System.Drawing.Size(103, 22)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Label3"
+        Me.Label3.Text = "OR Amount"
         '
-        'TextBox3
+        'txtOramt
         '
-        Me.TextBox3.Location = New System.Drawing.Point(223, 12)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(125, 20)
-        Me.TextBox3.TabIndex = 6
+        Me.txtOramt.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.txtOramt.Location = New System.Drawing.Point(399, 9)
+        Me.txtOramt.Name = "txtOramt"
+        Me.txtOramt.ReadOnly = True
+        Me.txtOramt.Size = New System.Drawing.Size(125, 27)
+        Me.txtOramt.TabIndex = 6
         '
-        'TextBox4
+        'txtOrbal
         '
-        Me.TextBox4.Location = New System.Drawing.Point(399, 13)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(125, 20)
-        Me.TextBox4.TabIndex = 7
+        Me.txtOrbal.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.txtOrbal.Location = New System.Drawing.Point(399, 35)
+        Me.txtOrbal.Name = "txtOrbal"
+        Me.txtOrbal.ReadOnly = True
+        Me.txtOrbal.Size = New System.Drawing.Size(125, 27)
+        Me.txtOrbal.TabIndex = 7
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(354, 15)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!)
+        Me.Label4.Location = New System.Drawing.Point(286, 35)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(39, 13)
+        Me.Label4.Size = New System.Drawing.Size(107, 22)
         Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Label4"
+        Me.Label4.Text = "OR Balance"
+        '
+        'ccrnum
+        '
+        Me.ccrnum.HeaderText = "Ref. #"
+        Me.ccrnum.Name = "ccrnum"
+        Me.ccrnum.ReadOnly = True
+        Me.ccrnum.Width = 130
+        '
+        'amtpay
+        '
+        Me.amtpay.HeaderText = "Amount"
+        Me.amtpay.Name = "amtpay"
+        Me.amtpay.ReadOnly = True
+        Me.amtpay.Width = 130
+        '
+        'ccrdte
+        '
+        Me.ccrdte.HeaderText = "Date"
+        Me.ccrdte.Name = "ccrdte"
+        Me.ccrdte.ReadOnly = True
+        Me.ccrdte.Width = 209
         '
         'balTrack
         '
@@ -112,29 +184,37 @@ Partial Class balTrack
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(536, 450)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.txtOrbal)
+        Me.Controls.Add(Me.txtOramt)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtOrdttm)
+        Me.Controls.Add(Me.txtOrnum)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dvBalances)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "balTrack"
-        Me.Text = "balTrack"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "Balance Tracker"
+        Me.TopMost = True
+        CType(Me.dvBalances, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dvBalances As DataGridView
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtOrnum As TextBox
+    Friend WithEvents txtOrdttm As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents txtOramt As TextBox
+    Friend WithEvents txtOrbal As TextBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents ccrnum As DataGridViewTextBoxColumn
+    Friend WithEvents amtpay As DataGridViewTextBoxColumn
+    Friend WithEvents ccrdte As DataGridViewTextBoxColumn
 End Class
